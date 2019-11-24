@@ -14,7 +14,7 @@ namespace Pdgt.BookApi.Controllers
                 Authors = new[] {"Stephen King"},
                 Key = Guid.NewGuid().ToString("N"),
                 NumberOfPages = 890,
-                PublishDate = DateTime.Parse("1978-02-12"),
+                PublishDate = "1978-02-12",
                 Subjects = new[] {"Horror"}
             };
         }

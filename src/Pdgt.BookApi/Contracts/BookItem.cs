@@ -15,7 +15,7 @@ namespace Pdgt.BookApi.Contracts
 
         public string Key { get; set; }
 
-        public DateTime PublishDate { get; set; }
+        public string PublishDate { get; set; }
 
     }
 }

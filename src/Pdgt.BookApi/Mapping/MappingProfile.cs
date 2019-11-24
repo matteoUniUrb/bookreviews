@@ -19,8 +19,10 @@ namespace Pdgt.BookApi.Mapping
                 .ForMember(dest => dest.AuthorKey, opt => opt.MapFrom(src => src.AuthorKeys.FirstOrDefault()));
 
             CreateMap<BookInfo, BookItem>()
-                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Identifiers.Select(id => id.Isbn10.Values.FirstOrDefault())))
-                .ForMember(dest => dest.PublishDate, opt => opt.MapFrom(src =>  DateTime.Parse(src.PublishDate)));
+                .ForMember(dest => dest.Authors, opt => opt.MapFrom(src => src.BookInfoContent.Authors.Select(a => a.Name)))
+                .ForMember(dest => dest.NumberOfPages, opt => opt.MapFrom(src => src.BookInfoContent.NumberOfPages))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.BookInfoContent.Title))
+                .ForMember(dest => dest.PublishDate, opt => opt.MapFrom(src =>  src.BookInfoContent.PublishDate));
 
 
         }

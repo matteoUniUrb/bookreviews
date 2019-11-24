@@ -6,7 +6,7 @@ namespace Pdgt.BookApi.Http
     public interface IHttpClientWrapper
     {
 
-        Task<T> GetAsync<T>(string requestUri);
+        Task<string> GetAsync(string requestUri);
 
         Task<HttpResponseMessage> PostAsync<T>(string requestUri, T content);
     }

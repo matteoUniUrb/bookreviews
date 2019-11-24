@@ -15,7 +15,7 @@ namespace Pdgt.BookApi.Http
             _httpClient = HttpClientFactory.Create();
         }
         
-        public async Task<T> GetAsync<T>(string requestUri)
+        public async Task<string> GetAsync(string requestUri)
         {
             using (var request = new HttpRequestMessage(HttpMethod.Get, requestUri))
             {
@@ -24,7 +24,7 @@ namespace Pdgt.BookApi.Http
 
                 if (resposeMessage.IsSuccessStatusCode)
                 {
-                    return JsonConvert.DeserializeObject<T>(responseString);
+                    return responseString;
                 }
 
                 throw new Exception(responseString);

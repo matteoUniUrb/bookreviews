@@ -4,7 +4,7 @@ namespace Pdgt.BookApi.Services.Contracts
 {
     public class SearchResultItem
     {
-        [JsonProperty("isbn")]
+        [JsonProperty("edition_key")]
         public string[] Keys { get; set; }
 
         [JsonProperty("title")]

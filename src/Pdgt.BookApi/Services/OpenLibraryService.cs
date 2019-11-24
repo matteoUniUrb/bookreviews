@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Pdgt.BookApi.Configurations;
 using Pdgt.BookApi.Http;
 using Pdgt.BookApi.Services.Contracts;
@@ -8,7 +10,6 @@ namespace Pdgt.BookApi.Services
 {
     public class OpenLibraryService : IOpenLibraryService
     {
-        private const string SearchEndpointFormat = "{0}/search.json?q={1}";
         private readonly IHttpClientWrapper _httpClientWrapper;
         private readonly IOptions<OpenLibraryConfig> _config;
 
@@ -20,13 +21,18 @@ namespace Pdgt.BookApi.Services
 
         public async Task<SearchResult> GetSearchResultAsync(string text)
         {
-            var endpoint = string.Format(SearchEndpointFormat, _config.Value.Uri, text);
-            return await _httpClientWrapper.GetAsync<SearchResult>(endpoint);
+            var endpoint = string.Format(_config.Value.SearchEndpointFormat, _config.Value.Uri, text);
+            var responseString = await _httpClientWrapper.GetAsync(endpoint);
+            return JsonConvert.DeserializeObject<SearchResult>(responseString);
         }
 
-        public Task<BookInfo> GetBookInfoAsync(string key)
+        public async Task<BookInfo> GetBookInfoAsync(string key)
         {
-            return Task.FromResult(default(BookInfo));
+            var endpoint = string.Format(_config.Value.BookDetailsEndpointFormat, _config.Value.Uri, key);
+            var stringBookInfo =  await _httpClientWrapper.GetAsync(endpoint);
+            //the book item is wrapped in an item in dynamic format {"OLID:{id}": { json content }
+            var jsonString = ((JObject)JsonConvert.DeserializeObject(stringBookInfo)).First.First.ToString();
+            return JsonConvert.DeserializeObject<BookInfo>(jsonString);
         }
     }
 }
