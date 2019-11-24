@@ -6,7 +6,7 @@ namespace Pdgt.BookApi.Services
     {
         public Task AddReviewAsync(string key, string review, BookRating bookRating)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pdgt.BookApi</name>
+    </assembly>
+    <members>
+        <member name="P:Pdgt.BookApi.Contracts.BookReviewRequest.ReviewText">
+            <summary>
+            Il testo della recensione
+            </summary>
+        </member>
+        <member name="P:Pdgt.BookApi.Contracts.BookReviewRequest.BookRating">
+            <summary>
+            Il rating della recensione (da 1 a 5)
+            </summary>
+        </member>
+        <member name="M:Pdgt.BookApi.Controllers.BooksController.SearchBooksAsync(System.String)">
+            <summary>
+            Ricerca libri con testo libero
+            </summary>
+            <param name="searchText">I parametri di ricerca</param>
+            <returns>Ritorna tutti i libri che hanno un match con il criterio di ricerca</returns>
+        </member>
+        <member name="M:Pdgt.BookApi.Controllers.BooksController.GetBookDetailsAsync(System.String)">
+            <summary>
+            I dettagli di un libro
+            </summary>
+            <param name="key">La chiave del libro</param>
+            <returns>Ritorna i dettagli di un libro</returns>
+        </member>
+        <member name="M:Pdgt.BookApi.Controllers.BooksController.PostReviewAsync(System.String,Pdgt.BookApi.Contracts.BookReviewRequest)">
+            <summary>
+            Aggiunge una recensione a un libro
+            </summary>
+            <param name="key">La chiave del libro</param>
+            <param name="bookReviewRequest">I paraemtri della richiesta</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

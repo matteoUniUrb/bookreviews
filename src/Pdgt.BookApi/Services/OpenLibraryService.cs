@@ -7,12 +7,12 @@ namespace Pdgt.BookApi.Services
     {
         public Task<SearchResult> GetSearchResultAsync(string text)
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(default(SearchResult));
         }
 
         public Task<BookInfo> GetBookInfoAsync(string key)
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(default(BookInfo));
         }
     }
 }
