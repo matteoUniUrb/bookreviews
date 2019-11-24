@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Pdgt.BookApi.Configurations;
+using Pdgt.BookApi.Http;
 using Pdgt.BookApi.Mapping;
 using Pdgt.BookApi.Services;
-using Swashbuckle.AspNetCore.Examples;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Pdgt.BookApi
@@ -33,6 +26,9 @@ namespace Pdgt.BookApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //configuration from appsettings
+            services.Configure<OpenLibraryConfig>(Configuration.GetSection("OpenLibraryApi"));
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(options => {
                 options.SwaggerDoc("v1", new Info { Title = "Book API", Version = "V1" });
@@ -52,6 +48,7 @@ namespace Pdgt.BookApi
             services.AddSingleton(mapper);
 
             //inject services
+            services.AddTransient<IHttpClientWrapper, HttpClientWrapper>();
             services.AddTransient<IOpenLibraryService, OpenLibraryService>();
             services.AddTransient<IBookReviewService, BookReviewService>();
 

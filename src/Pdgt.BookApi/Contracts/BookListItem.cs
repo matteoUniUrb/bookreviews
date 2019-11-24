@@ -8,6 +8,8 @@
 
         public string Key { get; set; }
 
-        public string ShortDescription { get; set; }
+        public string PublicationYear { get; set; }
+
+        public string AuthorKey { get; set; }
     }
 }

@@ -39,6 +39,7 @@ namespace Pdgt.BookApi.Controllers
         [Route("search")]
         public async Task<ActionResult<IEnumerable<BookListItem>>> SearchBooksAsync([Required]string searchText)
         {
+            searchText = searchText.Trim().Replace(" ", "+");
             var openLibraryResult = await _openLibraryService.GetSearchResultAsync(searchText);
             var mappedResult = new List<BookListItem>();
             openLibraryResult.Items.ToList().ForEach(item => mappedResult.Add(_mapper.Map<BookListItem>(item)));

@@ -12,10 +12,11 @@ namespace Pdgt.BookApi.Mapping
         public MappingProfile()
         {
             CreateMap<SearchResultItem, BookListItem>()
-                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.AuthorName))
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.AuthorNames.FirstOrDefault()))
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
-                .ForMember(dest => dest.ShortDescription, opt => opt.MapFrom(src => src.AuthorName))
-                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Key));
+                .ForMember(dest => dest.PublicationYear, opt => opt.MapFrom(src => src.PublishYears.FirstOrDefault()))
+                .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Keys.FirstOrDefault()))
+                .ForMember(dest => dest.AuthorKey, opt => opt.MapFrom(src => src.AuthorKeys.FirstOrDefault()));
 
             CreateMap<BookInfo, BookItem>()
                 .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Identifiers.Select(id => id.Isbn10.Values.FirstOrDefault())))

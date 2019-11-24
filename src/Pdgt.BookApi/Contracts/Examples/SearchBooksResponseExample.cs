@@ -15,14 +15,12 @@ namespace Pdgt.BookApi.Contracts.Examples
                     Author = "Stephen King",
                     Key = Guid.NewGuid().ToString("N"),
                     Title = "IT",
-                    ShortDescription = "A horror story..."
                 },
                 new BookListItem()
                 {
                     Author = "Dante Alighieri",
                     Key = Guid.NewGuid().ToString("N"),
                     Title = "La Divina Commedia",
-                    ShortDescription = "In mezzo al cammin di nostra vita..."
                 }
             };
         }
