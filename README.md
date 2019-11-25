@@ -11,9 +11,8 @@ Matteo C
 ## Matricola
 270018
 
-##Titolo del progetto: BookReviews
 
-##Relazione
+## Relazione
 
 TBD
 
