@@ -15,12 +15,12 @@ namespace Pdgt.BookApi.Contracts
         /// Il testo della recensione
         /// </summary>
         [Required]
-        public string ReviewText { get; set; }
+        public string Text { get; set; }
 
         /// <summary>
         /// Il rating della recensione (da 1 a 5)
         /// </summary>
         [Required]
-        public BookRating BookRating { get; set; }
+        public BookRating Rating { get; set; }
     }
 }

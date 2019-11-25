@@ -9,12 +9,12 @@
             Username del recensore
             </summary>
         </member>
-        <member name="P:Pdgt.BookApi.Contracts.BookReviewRequest.ReviewText">
+        <member name="P:Pdgt.BookApi.Contracts.BookReviewRequest.Text">
             <summary>
             Il testo della recensione
             </summary>
         </member>
-        <member name="P:Pdgt.BookApi.Contracts.BookReviewRequest.BookRating">
+        <member name="P:Pdgt.BookApi.Contracts.BookReviewRequest.Rating">
             <summary>
             Il rating della recensione (da 1 a 5)
             </summary>

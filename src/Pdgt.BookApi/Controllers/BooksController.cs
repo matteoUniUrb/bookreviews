@@ -106,7 +106,7 @@ namespace Pdgt.BookApi.Controllers
         {
             try
             {
-                await _bookReviewService.AddReviewAsync(key, request.Username, request.ReviewText, request.BookRating);
+                await _bookReviewService.AddReviewAsync(key, request.Username, request.Text, request.Rating);
                 return Created($"/books/{key}", null);
             }
             catch (Exception ex)
