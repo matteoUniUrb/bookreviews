@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pdgt.BookApi.Contracts;
 using Pdgt.BookApi.Contracts.Examples;
@@ -39,11 +42,22 @@ namespace Pdgt.BookApi.Controllers
         [Route("search")]
         public async Task<ActionResult<IEnumerable<BookListItem>>> SearchBooksAsync([Required]string searchText)
         {
-            searchText = searchText.Trim().Replace(" ", "+");
-            var openLibraryResult = await _openLibraryService.GetSearchResultAsync(searchText);
-            var mappedResult = new List<BookListItem>();
-            openLibraryResult.Items.ToList().ForEach(item => mappedResult.Add(_mapper.Map<BookListItem>(item)));
-            return Ok(mappedResult);
+            try
+            {
+                searchText = searchText.Trim().Replace(" ", "+");
+                var openLibraryResult = await _openLibraryService.GetSearchResultAsync(searchText);
+                var mappedResult = new List<BookListItem>();
+                openLibraryResult.Items.ToList().ForEach(item => mappedResult.Add(_mapper.Map<BookListItem>(item)));
+                return Ok(mappedResult);
+            }
+            catch (Exception ex)
+            {
+                return new ContentResult()
+                {
+                    StatusCode = 500,
+                    Content = ex.ToString()
+                };
+            }
         }
 
         /// <summary>
@@ -55,17 +69,28 @@ namespace Pdgt.BookApi.Controllers
         [Route("{key}")]
         [ProducesResponseType(typeof(IEnumerable<BookListItem>), (int)HttpStatusCode.OK)]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(GetBookDetailsResponseExample))]
-        public async Task<ActionResult<BookItem>> GetBookDetailsAsync([FromRoute]string key)
+        public async Task<ActionResult> GetBookDetailsAsync([FromRoute]string key)
         {
-            var openLibraryResultTask = _openLibraryService.GetBookInfoAsync(key);
-            var reviewsTask = _bookReviewService.GetReviews(key);
+            try
+            {
+                var openLibraryResultTask = _openLibraryService.GetBookInfoAsync(key);
+                var reviewsTask = _bookReviewService.GetReviews(key);
 
-            await Task.WhenAll(openLibraryResultTask, reviewsTask);
+                await Task.WhenAll(openLibraryResultTask, reviewsTask);
 
-            var mappedResult = _mapper.Map<BookItem>(await openLibraryResultTask);
-            mappedResult.Reviews = await reviewsTask;
+                var mappedResult = _mapper.Map<BookItem>(await openLibraryResultTask);
+                mappedResult.Reviews = await reviewsTask;
 
-            return Ok(mappedResult);
+                return Ok(mappedResult);
+            }
+            catch (Exception ex)
+            {
+                return new ContentResult()
+                {
+                    StatusCode = 500,
+                    Content = ex.ToString()
+                };
+            }
         }
 
         /// <summary>
@@ -75,12 +100,23 @@ namespace Pdgt.BookApi.Controllers
         /// <param name="request">I paraemtri della richiesta</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("{key}")]
+        [Route("/reviews/{key}")]
         [ProducesResponseType(typeof(IEnumerable<BookListItem>), (int)HttpStatusCode.Created)]
-        public async Task<ActionResult<BookItem>> PostReviewAsync([FromRoute]string key, [FromBody]BookReviewRequest request)
+        public async Task<ActionResult> PostReviewAsync([FromRoute]string key, [FromBody]BookReviewRequest request)
         {
-            await _bookReviewService.AddReviewAsync(key, request.Username, request.ReviewText, request.BookRating);
-            return Created($"/books/{key}", null);
+            try
+            {
+                await _bookReviewService.AddReviewAsync(key, request.Username, request.ReviewText, request.BookRating);
+                return Created($"/books/{key}", null);
+            }
+            catch (Exception ex)
+            {
+                return new ContentResult()
+                {
+                    StatusCode = 500,
+                    Content = ex.ToString()
+                };
+            }
         }
     }
 }
