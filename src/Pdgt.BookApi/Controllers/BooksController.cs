@@ -57,8 +57,14 @@ namespace Pdgt.BookApi.Controllers
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(GetBookDetailsResponseExample))]
         public async Task<ActionResult<BookItem>> GetBookDetailsAsync([FromRoute]string key)
         {
-            var openLibraryResult = await _openLibraryService.GetBookInfoAsync(key);
-            var mappedResult = _mapper.Map<BookItem>(openLibraryResult);
+            var openLibraryResultTask = _openLibraryService.GetBookInfoAsync(key);
+            var reviewsTask = _bookReviewService.GetReviews(key);
+
+            await Task.WhenAll(openLibraryResultTask, reviewsTask);
+
+            var mappedResult = _mapper.Map<BookItem>(await openLibraryResultTask);
+            mappedResult.Reviews = await reviewsTask;
+
             return Ok(mappedResult);
         }
 
@@ -66,17 +72,15 @@ namespace Pdgt.BookApi.Controllers
         /// Aggiunge una recensione a un libro
         /// </summary>
         /// <param name="key">La chiave del libro</param>
-        /// <param name="bookReviewRequest">I paraemtri della richiesta</param>
+        /// <param name="request">I paraemtri della richiesta</param>
         /// <returns></returns>
         [HttpPost]
         [Route("{key}")]
         [ProducesResponseType(typeof(IEnumerable<BookListItem>), (int)HttpStatusCode.Created)]
-        public async Task<ActionResult<BookItem>> PostReviewAsync([FromRoute]string key, [FromBody]BookReviewRequest bookReviewRequest)
+        public async Task<ActionResult<BookItem>> PostReviewAsync([FromRoute]string key, [FromBody]BookReviewRequest request)
         {
-            await _bookReviewService.AddReviewAsync(key, bookReviewRequest.ReviewText, bookReviewRequest.BookRating);
-            return Created((string)null, null);
+            await _bookReviewService.AddReviewAsync(key, request.Username, request.ReviewText, request.BookRating);
+            return Created($"/books/{key}", null);
         }
-
-
     }
 }

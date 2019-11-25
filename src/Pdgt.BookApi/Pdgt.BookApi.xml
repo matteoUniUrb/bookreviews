@@ -4,6 +4,11 @@
         <name>Pdgt.BookApi</name>
     </assembly>
     <members>
+        <member name="P:Pdgt.BookApi.Contracts.BookReviewRequest.Username">
+            <summary>
+            Username del recensore
+            </summary>
+        </member>
         <member name="P:Pdgt.BookApi.Contracts.BookReviewRequest.ReviewText">
             <summary>
             Il testo della recensione
@@ -33,7 +38,7 @@
             Aggiunge una recensione a un libro
             </summary>
             <param name="key">La chiave del libro</param>
-            <param name="bookReviewRequest">I paraemtri della richiesta</param>
+            <param name="request">I paraemtri della richiesta</param>
             <returns></returns>
         </member>
     </members>

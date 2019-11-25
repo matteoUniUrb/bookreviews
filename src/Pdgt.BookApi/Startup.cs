@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pdgt.BookApi.Configurations;
+using Pdgt.BookApi.Data;
 using Pdgt.BookApi.Http;
 using Pdgt.BookApi.Mapping;
+using Pdgt.BookApi.Repositories;
 using Pdgt.BookApi.Services;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -28,6 +30,7 @@ namespace Pdgt.BookApi
         {
             //configuration from appsettings
             services.Configure<OpenLibraryConfig>(Configuration.GetSection("OpenLibraryApi"));
+            services.Configure<ReviewsRepositoryConfig>(Configuration.GetSection("ReviewsDatabase"));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(options => {
@@ -51,6 +54,7 @@ namespace Pdgt.BookApi
             services.AddTransient<IHttpClientWrapper, HttpClientWrapper>();
             services.AddTransient<IOpenLibraryService, OpenLibraryService>();
             services.AddTransient<IBookReviewService, BookReviewService>();
+            services.AddTransient<IRepository<BookReviews>, ReviewsRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

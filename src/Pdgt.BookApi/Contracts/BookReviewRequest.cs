@@ -6,6 +6,12 @@ namespace Pdgt.BookApi.Contracts
     public class BookReviewRequest
     {
         /// <summary>
+        /// Username del recensore
+        /// </summary>
+        [Required]
+        public string Username { get; set; }
+
+        /// <summary>
         /// Il testo della recensione
         /// </summary>
         [Required]

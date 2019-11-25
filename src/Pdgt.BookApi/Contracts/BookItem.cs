@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Pdgt.BookApi.Data;
 
 namespace Pdgt.BookApi.Contracts
 {
@@ -17,5 +19,6 @@ namespace Pdgt.BookApi.Contracts
 
         public string PublishDate { get; set; }
 
+        public BookReviews Reviews { get; set; }
     }
 }
