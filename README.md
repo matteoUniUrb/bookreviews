@@ -50,7 +50,7 @@ Sono state implementati 3 endpoint:
 
 * `GET   /v1/books/search`  => effettua la ricerca di libri con chiave di testo libera. Utilizza Open Library API
 * `GET   /v1/books/{key}`    => richiede i dettagli di un libro data la sua chiave (Open Library ID). Utilizza Open Library API
-* `POST  /v1//reviews/{key}`  => aggiunge una recensione al libro specificato (utilizza un database locale LiteDB).
+* `POST  /v1/books/reviews/{key}`  => aggiunge una recensione al libro specificato (utilizza un database locale LiteDB).
 
 ## Messa online dell'API
 
@@ -61,6 +61,31 @@ Il servizio é ospitato su una istanza Windows/IIS.
 Il servizio é accessibile all'url : http://bookreviewsapi-env.k373fqgsam.us-east-1.elasticbeanstalk.com/swagger/index.html (swagger).
 
 ## Esempio di utilizzo del servizio web
+
+### GET   /v1/books/search => ricerca libri a chiave libera
+
+1. Aprire la pagina Swagger
+2. Cliccare sul tasto `GET` dell'endpoint `GET /v1/books/search` ed espandere il pannello
+3. Cliccare sul tasto `TRY OUT` sulla destra, viene cosí visualizzato il campo per la ricerca libera
+4. Immettere un testo quale "il signore degli anelli" e premere su `EXECUTE`. 
+5. Ottenete una risposta HTTP 200 OK e un contenuto in formato Json della risposta con un elenco di libri
+
+### GET   /v1/books/{key} => richiesta dettaglio libro
+
+1. Aprire la pagina Swagger
+2. Cliccare sul tasto `GET` dell'endpoint `GET v1/books/{key}` ed espandere il pannello
+3. Cliccare sul tasto `TRY OUT` sulla destra, viene cosí visualizzato il campo per l'immissione della chiave del libro
+4. Dalla risposta alla chiamata al precedente endpoint (ricerca) copiate una chiave di un qualsiasi libro e incollatela nel campo chiave. Poi premete `EXECUTE`
+5. Ottenete una risposta HTTP 200 OK e un contenuto in formato Json della risposta con il dettaglio del libro (con eventuali recensioni aggiunte).
+
+### POST   /v1/books/reviews => aggiunta di una recensione
+
+1. Aprire la pagina Swagger
+2. Cliccare sul tasto `POST` dell'endpoint `POST /v1/books/reviews` ed espandere il pannello
+3. Cliccare sul tasto `TRY OUT` sulla destra, vengono cosí visualizzato i campi della richiesta del libro. Un campo di testo e una parte in Json che rappresenta il body della richiesta da inviare.
+4. Dalla risposta alla chiamata all'endpoint di ricerca copiate una chiave di un qualsiasi libro e incollatela nel campo chiave. Poi premete `EXECUTE`
+5. Compilate i campi del body (`username`, `text`, `rating`). Rating accetta valori numerici da 1 a 4.
+5. Ottenete una risposta HTTP 201 Created. La vostra recensione é stata aggiunta. Invocando di nuovo l'endpoint per il dettaglio libro dovreste ora vedere la vostra recensione.
 
 TBD
 • Breve relazione:
