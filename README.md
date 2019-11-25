@@ -18,11 +18,11 @@ BookReviews é un set di web API che permette di effettuare una ricerca libri tr
 
 ## Architettura e scelte implementative
 
-L'applicazione é stata sviluppata su framework multi-platform .NET Core 2.2.
+L'applicazione é stata sviluppata su framework multi-platform `.NET Core 2.2`.
 
 E' una applicazione di tipo WebApi che espone endpoint tramite la classe Controller (`BookController` in questo progetto).
 
-L'applicazione utilizza OpenLibrary e LiteDB come risorse "esterne".
+L'applicazione utilizza `OpenLibrary` e `LiteDB` come risorse "esterne".
 
 OpenLibrary espone delle API pubbliche e viene invocata tramite richiesta HTTP (Implementata nelle classi in cartella HTTP).
 
@@ -30,22 +30,25 @@ LiteDB é un semplice database per la piattaforma .NET che permette di salvare i
 
 L'applicazione é sviluppata su 3 layer:
 
-* Controller    => é l'entry point per ciascun endpoint. Questo strato applicativo invoca lo strato sottostante "Service"
-* Service   => é lo strato dove é implementata la business logic. Nel nostro caso abbiamo l'invocazione HTTP delle API di OpenLibrary e l'invocazione dello strato sottostante di Repository per l'accesso al database LiteDB.
-* Repository    => é lo strato di accesso al database dove vengono implementati i metodi di lettura/scrittura.
+* `Controller`    => é l'entry point per ciascun endpoint. Questo strato applicativo invoca lo strato sottostante `Service`
+* `Service`   => é lo strato dove é implementata la business logic. Nel nostro caso abbiamo l'invocazione HTTP delle API di OpenLibrary e l'invocazione dello strato sottostante di Repository per l'accesso al database LiteDB.
+* `Repository`    => é lo strato di accesso al database dove vengono implementati i metodi di lettura/scrittura.
 
 
 ## Riferimento a servizi esterni utilizzati
 
-Si fa riferimento alle API di www.openlibrary.com (per integrazione API vedere il Development Center: https://openlibrary.org/developers)
+* L'appplicazione utilizza le API di www.openlibrary.com (per integrazione API vedere il Development Center: https://openlibrary.org/developers)
+* Si é utilizzato per lo storage delle recensioni un database locale di semplice utilizzo come LiteDB (https://www.litedb.org/)
+* Per la mappatura del contratto delle API di OpenLibrary e il contratto di BookReviews si é utilizzato il NuGet package AutoMapper (https://automapper.org/)
+* Per l'utilizzo di OpenApi e la generazione di documentazione delle API é stato utilizzato il NuGet package SwashBuckle per .Net Core (https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.0&tabs=visual-studio)
 
 ## Documentazione API
 
 Sono state implementati 3 endpoint:
 
-* GET   /v1/books/search  => effettua la ricerca di libri con chiave di testo libera. Utilizza Open Library API
-* GET   /v1/books/{key}    => richiede i dettagli di un libro data la sua chiave (Open Library ID). Utilizza Open Library API
-* POST  /v1//reviews/{key}  => aggiunge una recensione al libro specificato (utilizza un database locale LiteDB).
+* `GET   /v1/books/search`  => effettua la ricerca di libri con chiave di testo libera. Utilizza Open Library API
+* `GET   /v1/books/{key}`    => richiede i dettagli di un libro data la sua chiave (Open Library ID). Utilizza Open Library API
+* `POST  /v1//reviews/{key}`  => aggiunge una recensione al libro specificato (utilizza un database locale LiteDB).
 
 ## Messa online dell'API
 
