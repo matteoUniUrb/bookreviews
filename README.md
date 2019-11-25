@@ -52,6 +52,18 @@ Sono state implementati 3 endpoint:
 * `GET   /v1/books/{key}`    => richiede i dettagli di un libro data la sua chiave (Open Library ID). Utilizza Open Library API
 * `POST  /v1/books/reviews/{key}`  => aggiunge una recensione al libro specificato (utilizza un database locale LiteDB).
 
+### GET /v1/books/search
+
+TBD (URL, dettagli delle richieste HTTP supportate, formato e codifica dei dati in input ed output, etc.)
+
+### GET /v1/books/{key}
+
+TBD (URL, dettagli delle richieste HTTP supportate, formato e codifica dei dati in input ed output, etc.)
+
+### POST  /v1/books/reviews/{key}
+
+TBD (URL, dettagli delle richieste HTTP supportate, formato e codifica dei dati in input ed output, etc.)
+
 ## Messa online dell'API
 
 Per la messa online é stato utilizzata la piattaforma Amazon Web Services - BeanStalk, un servizio che permette un deploy veloce su piattaforma cloud (EC2).
@@ -87,17 +99,6 @@ Il servizio é accessibile all'url : http://bookreviewsapi-env.k373fqgsam.us-eas
 5. Compilate i campi del body (`username`, `text`, `rating`). Rating accetta valori numerici da 1 a 4.
 5. Ottenete una risposta HTTP 201 Created. La vostra recensione é stata aggiunta. Invocando di nuovo l'endpoint per il dettaglio libro dovreste ora vedere la vostra recensione.
 
-TBD
-• Breve relazione:
-o Descrizione di architettura e scelte implementative (componenti
-software, comunicazione tra componenti, tecnologie adottate,
-librerie, scelte implementative di rilievo, etc.),
-o Riferimento a eventuali dati o servizi esterni sfruttati,
-o Documentazione dell’API implementata (URL, dettagli delle
-richieste HTTP supportate, formato e codifica dei dati in input
-ed output, etc.),
-o Descrizione delle modalità della messa online del servizio,
-o Esempio descrittivo di utilizzo del servizio Web (sequenza di
-richieste/risposte HTTP di esempio, descrizione dei dati
-attesi/ottenuti), se il progetto è composto anche da un client,
-eventuali screenshot che ne dimostrano l’utilizzo.
+## Client Swagger
+
+TBD (immagini)
