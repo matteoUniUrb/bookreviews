@@ -37,7 +37,9 @@ L'applicazione é sviluppata su 3 layer:
 
 ## Riferimento a servizi esterni utilizzati
 
-* L'appplicazione utilizza le API di www.openlibrary.com (per integrazione API vedere il Development Center: https://openlibrary.org/developers)
+* L'appplicazione utilizza le API di www.openlibrary.com (per integrazione API vedere il Development Center: https://openlibrary.org/developers). In particolare vengono utilizzate le seguenti API:
+    * Search : per l'endpoint di ricerca libri => https://openlibrary.org/dev/docs/api/search
+    * Books : per l'endoint di recupero informazioni su un libro => https://openlibrary.org/dev/docs/api/books
 * Si é utilizzato per lo storage delle recensioni un database locale di semplice utilizzo come LiteDB (https://www.litedb.org/)
 * Per la mappatura del contratto delle API di OpenLibrary e il contratto di BookReviews si é utilizzato il NuGet package AutoMapper (https://automapper.org/)
 * Per l'utilizzo di OpenApi e la generazione di documentazione delle API é stato utilizzato il NuGet package SwashBuckle per .Net Core (https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.0&tabs=visual-studio)
