@@ -4,7 +4,7 @@
 
 Una web API per ricercare libri e aggiungere una recensione. 
 
-##Nome
+## Nome
 
 Matteo C 
  
@@ -19,23 +19,23 @@ TBD
 
 o Descrizione del servizio implementato e del suo scopo,
 
-#Architettura e scelte implementative
+## Architettura e scelte implementative
 
 TBD
 
-#Riferimento a servizi esterni utilizzati
+## Riferimento a servizi esterni utilizzati
 
 TBD
 
-#Documentazione API
+## Documentazione API
 
 TBD
 
-#Messa online dell'API
+## Messa online dell'API
 
 TBD
 
-#Esempio di utilizzo del servizio web
+## Esempio di utilizzo del servizio web
 
 TBD
 • Breve relazione:
