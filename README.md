@@ -6,7 +6,7 @@ Una web API per ricercare libri e aggiungere recensioni.
 
 ## Nome
 
-Matteo C 
+Matteo Cunietti
  
 ## Matricola
 270018
@@ -14,17 +14,11 @@ Matteo C
 
 ## Relazione
 
-BookReviews é un set di web API che permette di effettuare una ricerca tra i libri di Open Library e di aggiungere recensioni degli utenti per ciascun libro.
+BookReviews é un set di web API che permette di effettuare una ricerca tra i libri di Open Library e di aggiungere recensioni degli utenti.
 
 ## Architettura e scelte implementative
 
 L'applicazione é stata sviluppata su framework multi-platform `.NET Core 2.2`.
-
-E' una applicazione di tipo WebApi che espone endpoint tramite la classe Controller (`BookController` in questo progetto).
-
-L'applicazione utilizza `OpenLibrary` e `LiteDB`:
-* `OpenLibrary` espone delle API pubbliche e viene invocata tramite richiesta HTTP (Implementata nelle classi in cartella HTTP).
-* `LiteDB` é un semplice database per la piattaforma .NET che permette di salvare i dati su un file locale.
 
 L'applicazione é sviluppata su 3 layer:
 
@@ -37,17 +31,28 @@ L'applicazione é sviluppata su 3 layer:
 
 ### Open Library
 
-L'appplicazione utilizza le API di www.openlibrary.com (per integrazione API vedere la pagina dedicata agli sviluppatori: https://openlibrary.org/developers). In particolare vengono utilizzate le seguenti API:
+L'applicazione utilizza `OpenLibrary`, una piattaforma `open` che ospita un catalogo di tutti i libri pubblicati (al momento ospitano 20 milioni di titoli).
+
+Open Library permette la visualizzazione di tutte le pubblicazioni sul loro sito www.openlibrary.org ma espone anche delle API pubbliche e aperte per poter integrare il loro catalogo in applicazioni terze (per integrazione API vedere la pagina dedicata agli sviluppatori: https://openlibrary.org/developers).
+
+Per l'applicazione Book Reviews vengono utilizzate le seguenti Open Library API:
 * `Search` : per l'endpoint di ricerca libri => https://openlibrary.org/dev/docs/api/search
 * `Books` : per l'endoint di recupero informazioni su un libro => https://openlibrary.org/dev/docs/api/books
 
 ## Database
 
-Si é utilizzato per lo storage delle recensioni un database locale di semplice utilizzo come `LiteDB` (https://www.litedb.org/)
+Si é utilizzato per lo storage delle recensioni un database locale di semplice utilizzo, `LiteDB` (https://www.litedb.org/)
+
+La configurazione attuale prevede che i dati vengano salvati su un file locale (`/Data/reviews.db`).
+
 ## Nuget packages
-* Per la mappatura del contratto delle API di OpenLibrary e il contratto delle API di Book Reviews si é utilizzato il NuGet package `AutoMapper` (https://automapper.org/).
-* Per l'utilizzo di OpenApi e la generazione di documentazione delle API é stato utilizzato il NuGet package `SwashBuckle per .Net Core` (https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.0&tabs=visual-studio). Questo ha permesso:
-    * La generazione automatica di una pagina di documentazione e che operi come client per l'API (http://bookreviewsapi-env.k373fqgsam.us-east-1.elasticbeanstalk.com/swagger/index.html) 
+
+Sono stati utilizzati, oltre ai generici packages per Asp.Net core (configurazione, dependency injection, ecc) anche i seguenti Nuget packages, tutti scaricabili gratuitamente dalla piattaforma www.nuget.org :
+
+* `AutoMapper` per la mappatura del contratto delle API di OpenLibrary e il contratto delle API di Book Reviews (https://automapper.org/).
+* `SwashBuckle per .Net Core` per l'utilizzo di OpenApi e la generazione di documentazione delle API (https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.0&tabs=visual-studio). Questo package ha permesso:
+    * La generazione automatica di una pagina di documentazione 
+    * Un vero e proprio client online per utilizzare le API manualmente da interfaccia web 
     * Tramite l'integrazione della documentazione XML generata dalla compilazione del progetto sono esposte tutte le descrizioni dei parametri e dei tipi utilizzati dalle API
     * Tramite l'implementazione di classi di tipo `IExampleProvider` vengono visualizzati anche esempi `json` delle richieste e risposte in modo da permettere a sviluppatori di integrare agevolmente le API
 
@@ -121,7 +126,6 @@ Body:
   }
 }
 ```
-
 
 ### POST  /v1/books/reviews/{key}
 Aggiunge una recensione a un libro (utilizza database locale LiteDB)
