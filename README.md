@@ -187,7 +187,7 @@ L'utilizzo ideale delle API é sequenziale ed é il seguente:
 
 1. Apriamo l'endpoint di ricerca
 
-![ricerca](img/tutorial_search_0.png
+![ricerca](img/tutorial_search_0.png)
 
 2. Inseriamo in testo di ricerca ed eseguiamo premendo il tasto `Execute`
 
@@ -201,7 +201,7 @@ L'utilizzo ideale delle API é sequenziale ed é il seguente:
 
 1. Apriamo l'endpoint di dettaglio del libro
 
-![dettaglio](img/tutorial_bookdetails_0.png
+![dettaglio](img/tutorial_bookdetails_0.png)
 
 2. Inseriamo la chiave primaria del libro ed eseguiamo premendo il tasto `Execute`
 
@@ -217,7 +217,7 @@ L'utilizzo ideale delle API é sequenziale ed é il seguente:
 
 1. Apriamo l'endpoint di aggiunta di una recensione
 
-![recensione](img/tutorial_review_0.png
+![recensione](img/tutorial_review_0.png)
 
 2. Inseriamo la chiave primaria del libro e i dettagli della recensione, poi premiamo `Execute`
 
