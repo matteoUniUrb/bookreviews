@@ -26,6 +26,7 @@ L'applicazione é sviluppata su 3 layer:
 * `Service`   => é lo strato dove é implementata la business logic. Nel nostro caso abbiamo l'invocazione HTTP delle API di OpenLibrary e l'invocazione dello strato sottostante di Repository per l'accesso al database LiteDB.
 * `Repository`    => é lo strato di accesso al database dove vengono implementati i metodi di lettura/scrittura.
 
+Per la comunicazione HTTP é stata utilizzata la classe `System.Net.Http.HttpClient` che gestisce la comunicazione socket internamente, e di cui abbiamo utilizzato il metodo `SendAsync` per la comunicazione con le OpenLibrary API. 
 
 ## Riferimento a servizi esterni utilizzati
 
@@ -68,7 +69,9 @@ Sono state implementati 3 endpoint:
 Ricerca libri con testo libero. Utilizza Open Library API
 #### Request
 Http method: `GET`
+
 Accepts :  `application/json`
+
 Parameters:
 * `text` : *(string / querystring / required)* il testo da ricercare
 
@@ -93,7 +96,9 @@ Body:
 Recupera i dettagli di un libro. Utilizza Open Library API
 #### Request
 Http method: `GET`
+
 Accepts :  `application/json`
+
 Parameters:
 * `key`: *(string / path / required)* la chiave primaria del libro
 
@@ -131,7 +136,9 @@ Body:
 Aggiunge una recensione a un libro (utilizza database locale LiteDB)
 #### Request
 Http method: `POST`
+
 Accepts :  `application/json`
+
 Parameters:
 * `key`: *(string / path / required)* la chiave primaria del libro
 * `username`: *(string / body / required)* lo username del recensore
