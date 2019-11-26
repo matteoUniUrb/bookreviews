@@ -124,7 +124,7 @@ Body:
 
 
 ### POST  /v1/books/reviews/{key}
-Aggiunge una recensione a un libro (utilizza un database locale LiteDB)
+Aggiunge una recensione a un libro (utilizza database locale LiteDB)
 #### Request
 Http method: `POST`
 Accepts :  `application/json`
@@ -142,11 +142,19 @@ Status code:
 
 Per la messa online é stato utilizzata la piattaforma Amazon Web Services - BeanStalk, un servizio che permette un deploy veloce su piattaforma cloud (EC2).
 
+Per maggiori informazioni su Amazon BeanStalk vedere https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html 
+
 Il servizio é ospitato su una istanza Windows/IIS.
 
-Il servizio é accessibile all'url : http://bookreviewsapi-env.k373fqgsam.us-east-1.elasticbeanstalk.com/swagger/index.html (swagger).
+Url del servizio: http://bookreviewsapi-env.k373fqgsam.us-east-1.elasticbeanstalk.com/swagger/index.html (swagger).
 
 ## Esempio di utilizzo del servizio web
+
+L'utilizzo ideale delle API é sequenziale ed é il seguente:
+
+1. Ricerca libera di libri
+2. Visualizzazione dettaglio di un singolo libro
+3. Aggiunta recensione al libro
 
 ### GET   /v1/books/search => ricerca libri a chiave libera
 
@@ -175,4 +183,54 @@ Il servizio é accessibile all'url : http://bookreviewsapi-env.k373fqgsam.us-eas
 
 ## Client Swagger
 
-TBD (immagini)
+### GET   /v1/books/search => ricerca libri a chiave libera
+
+1. Apriamo l'endpoint di ricerca
+
+![ricerca](img/tutorial_search_0.png
+
+2. Inseriamo in testo di ricerca ed eseguiamo premendo il tasto `Execute`
+
+![ricerca](img/tutorial_search_1.png)
+
+3. Otteniamo HTTP 200 OK con una lista di libri che soddisfano il criterio di ricerca nel body della risposta
+
+![ricerca](img/tutorial_search_1.png)
+
+### GET   /v1/books/{key} => richiesta dettaglio libro
+
+1. Apriamo l'endpoint di dettaglio del libro
+
+![dettaglio](img/tutorial_bookdetails_0.png
+
+2. Inseriamo la chiave primaria del libro ed eseguiamo premendo il tasto `Execute`
+
+![dettaglio](img/tutorial_bookdetails_1.png)
+
+3. Otteniamo HTTP 200 OK e i dettagli del libro nel body della risposta
+
+![dettaglio](img/tutorial_bookdetails_2.png)
+
+
+
+### POST   /v1/books/reviews => aggiunta di una recensione
+
+1. Apriamo l'endpoint di aggiunta di una recensione
+
+![recensione](img/tutorial_review_0.png
+
+2. Inseriamo la chiave primaria del libro e i dettagli della recensione, poi premiamo `Execute`
+
+![recensione](img/tutorial_review_1.png)
+
+3. Otteniamo HTTP 201 Created 
+
+![recensione](img/tutorial_review_2.png)
+
+### Controllo della nuova recensione
+
+1. Apriamo l'endpoint di dettaglio del libro a cui abbiamo appena aggiunto una recensione e otteniamo il seguente risultato
+
+![recensione](img/tutorial_review_final.png)
+
+Con la nostra recensione aggiunta al dettaglio del libro!
