@@ -96,3 +96,4 @@ _pkginfo.txt
 !*.[Cc]ache/
 /ol_dump_works_2019-08-31.txt/*
 /aws/*
+*.db
