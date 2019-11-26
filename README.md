@@ -195,7 +195,7 @@ L'utilizzo ideale delle API é sequenziale ed é il seguente:
 
 3. Otteniamo HTTP 200 OK con una lista di libri che soddisfano il criterio di ricerca nel body della risposta
 
-![ricerca](img/tutorial_search_1.png)
+![ricerca](img/tutorial_search_2.png)
 
 ### GET   /v1/books/{key} => richiesta dettaglio libro
 
