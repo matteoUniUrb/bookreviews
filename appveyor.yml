@@ -17,4 +17,4 @@ nuget:
   disable_publish_on_pr: true
 
 build_script:
-- ps: .\src\Build.ps1
+- ps: .\src\Pdgt.BookApi\Build.ps1
