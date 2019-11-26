@@ -59,13 +59,13 @@ namespace Pdgt.BookApi.Controllers
         }
 
         /// <summary>
-        /// I dettagli di un libro
+        /// Recupera i dettagli di un libro
         /// </summary>
         /// <param name="key">La chiave del libro</param>
         /// <returns>Ritorna i dettagli di un libro</returns>
         [HttpGet]
         [Route("{key}")]
-        [ProducesResponseType(typeof(IEnumerable<BookListItem>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BookItem), (int)HttpStatusCode.OK)]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(GetBookDetailsResponseExample))]
         public async Task<ActionResult> GetBookDetailsAsync([FromRoute]string key)
         {

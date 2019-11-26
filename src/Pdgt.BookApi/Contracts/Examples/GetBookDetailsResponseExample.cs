@@ -1,8 +1,7 @@
 ﻿using System;
-using Pdgt.BookApi.Contracts;
 using Swashbuckle.AspNetCore.Examples;
 
-namespace Pdgt.BookApi.Controllers
+namespace Pdgt.BookApi.Contracts.Examples
 {
     public class GetBookDetailsResponseExample : IExamplesProvider
     {
