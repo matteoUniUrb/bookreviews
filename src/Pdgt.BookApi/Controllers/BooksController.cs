@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pdgt.BookApi.Contracts;
 using Pdgt.BookApi.Contracts.Examples;
@@ -34,18 +32,18 @@ namespace Pdgt.BookApi.Controllers
         /// <summary>
         /// Ricerca libri con testo libero
         /// </summary>
-        /// <param name="searchText">I parametri di ricerca</param>
+        /// <param name="text">I parametri di ricerca</param>
         /// <returns>Ritorna tutti i libri che hanno un match con il criterio di ricerca</returns>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<BookListItem>), (int)HttpStatusCode.OK)]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(SearchBooksResponseExample))]
         [Route("search")]
-        public async Task<ActionResult<IEnumerable<BookListItem>>> SearchBooksAsync([Required]string searchText)
+        public async Task<ActionResult<IEnumerable<BookListItem>>> SearchBooksAsync([Required]string text)
         {
             try
             {
-                searchText = searchText.Trim().Replace(" ", "+");
-                var openLibraryResult = await _openLibraryService.GetSearchResultAsync(searchText);
+                text = text.Trim().Replace(" ", "+");
+                var openLibraryResult = await _openLibraryService.GetSearchResultAsync(text);
                 var mappedResult = new List<BookListItem>();
                 openLibraryResult.Items.ToList().ForEach(item => mappedResult.Add(_mapper.Map<BookListItem>(item)));
                 return Ok(mappedResult);
@@ -101,7 +99,7 @@ namespace Pdgt.BookApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("/reviews/{key}")]
-        [ProducesResponseType(typeof(IEnumerable<BookListItem>), (int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.Created)]
         public async Task<ActionResult> PostReviewAsync([FromRoute]string key, [FromBody]BookReviewRequest request)
         {
             try

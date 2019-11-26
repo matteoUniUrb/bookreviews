@@ -15,12 +15,16 @@ namespace Pdgt.BookApi.Contracts.Examples
                     Author = "Stephen King",
                     Key = Guid.NewGuid().ToString("N"),
                     Title = "IT",
+                    AuthorKey = Guid.NewGuid().ToString("N"),
+                    PublicationYear = "1978"
                 },
                 new BookListItem()
                 {
                     Author = "Dante Alighieri",
                     Key = Guid.NewGuid().ToString("N"),
                     Title = "La Divina Commedia",
+                    AuthorKey = Guid.NewGuid().ToString("N"),
+                    PublicationYear = "1992"
                 }
             };
         }

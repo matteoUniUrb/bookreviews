@@ -23,7 +23,7 @@
             <summary>
             Ricerca libri con testo libero
             </summary>
-            <param name="searchText">I parametri di ricerca</param>
+            <param name="text">I parametri di ricerca</param>
             <returns>Ritorna tutti i libri che hanno un match con il criterio di ricerca</returns>
         </member>
         <member name="M:Pdgt.BookApi.Controllers.BooksController.GetBookDetailsAsync(System.String)">

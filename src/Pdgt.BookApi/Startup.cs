@@ -34,7 +34,7 @@ namespace Pdgt.BookApi
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(options => {
-                options.SwaggerDoc("v1", new Info { Title = "Book API", Version = "V1" });
+                options.SwaggerDoc("v1", new Info { Title = "Book Reviews API", Version = "V1" });
 
                 var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Pdgt.BookApi.xml");
 

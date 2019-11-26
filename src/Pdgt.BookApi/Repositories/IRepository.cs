@@ -1,4 +1,6 @@
-﻿namespace Pdgt.BookApi.Repositories
+﻿using Pdgt.BookApi.Data;
+
+namespace Pdgt.BookApi.Repositories
 {
     public interface IRepository<T> where T : EntityBase
     {

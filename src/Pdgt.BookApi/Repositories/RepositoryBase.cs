@@ -1,5 +1,5 @@
 ﻿using LiteDB;
-using Pdgt.BookApi.Repositories;
+using Pdgt.BookApi.Data;
 
 namespace Pdgt.BookApi.Repositories
 {

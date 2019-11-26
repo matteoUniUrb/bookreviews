@@ -1,4 +1,4 @@
-﻿namespace Pdgt.BookApi
+﻿namespace Pdgt.BookApi.Data
 {
     public class EntityBase
     {
