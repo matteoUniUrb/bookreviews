@@ -14,7 +14,7 @@ Matteo C
 
 ## Relazione
 
-BookReviews é un set di web API che permette di effettuare una ricerca libri tramite la piattaforma OpenLibrary e l'aggiunta di recensioni a libri di testo.
+BookReviews é un set di web API che permette di effettuare una ricerca tra i libri di Open Library e di aggiungere recensioni degli utenti per ciascun libro.
 
 ## Architettura e scelte implementative
 
@@ -22,11 +22,9 @@ L'applicazione é stata sviluppata su framework multi-platform `.NET Core 2.2`.
 
 E' una applicazione di tipo WebApi che espone endpoint tramite la classe Controller (`BookController` in questo progetto).
 
-L'applicazione utilizza `OpenLibrary` e `LiteDB` come risorse "esterne".
-
-OpenLibrary espone delle API pubbliche e viene invocata tramite richiesta HTTP (Implementata nelle classi in cartella HTTP).
-
-LiteDB é un semplice database per la piattaforma .NET che permette di salvare i dati su un file locale.
+L'applicazione utilizza `OpenLibrary` e `LiteDB`:
+* `OpenLibrary` espone delle API pubbliche e viene invocata tramite richiesta HTTP (Implementata nelle classi in cartella HTTP).
+* `LiteDB` é un semplice database per la piattaforma .NET che permette di salvare i dati su un file locale.
 
 L'applicazione é sviluppata su 3 layer:
 
@@ -37,32 +35,88 @@ L'applicazione é sviluppata su 3 layer:
 
 ## Riferimento a servizi esterni utilizzati
 
-* L'appplicazione utilizza le API di www.openlibrary.com (per integrazione API vedere il Development Center: https://openlibrary.org/developers). In particolare vengono utilizzate le seguenti API:
+* L'appplicazione utilizza le API di www.openlibrary.com (per integrazione API vedere la pagina dedicata agli sviluppatori: https://openlibrary.org/developers). In particolare vengono utilizzate le seguenti API:
     * `Search` : per l'endpoint di ricerca libri => https://openlibrary.org/dev/docs/api/search
     * `Books` : per l'endoint di recupero informazioni su un libro => https://openlibrary.org/dev/docs/api/books
 * Si é utilizzato per lo storage delle recensioni un database locale di semplice utilizzo come `LiteDB` (https://www.litedb.org/)
-* Per la mappatura del contratto delle API di OpenLibrary e il contratto di BookReviews si é utilizzato il NuGet package `AutoMapper` (https://automapper.org/)
-* Per l'utilizzo di OpenApi e la generazione di documentazione delle API é stato utilizzato il NuGet package `SwashBuckle per .Net Core` (https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.0&tabs=visual-studio)
+* Per la mappatura del contratto delle API di OpenLibrary e il contratto delle API di Book Reviews si é utilizzato il NuGet package `AutoMapper` (https://automapper.org/).
+* Per l'utilizzo di OpenApi e la generazione di documentazione delle API é stato utilizzato il NuGet package `SwashBuckle per .Net Core` (https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.0&tabs=visual-studio). Questo ha permesso:
+    * La generazione automatica di una pagina di documentazione e che operi come client per l'API (http://bookreviewsapi-env.k373fqgsam.us-east-1.elasticbeanstalk.com/swagger/index.html) 
+    * Tramite l'integrazione della documentazione XML generata dalla compilazione del progetto sono esposte tutte le descrizioni dei parametri e dei tipi utilizzati dalle API
+    * Tramite l'implementazione di classi di tipo `IExampleProvider` vengono visualizzati anche esempi `json` delle richieste e risposte in modo da permettere a sviluppatori di integrare agevolmente le API
 
 ## Documentazione API
 
 Sono state implementati 3 endpoint:
 
-* `GET   /v1/books/search`  => effettua la ricerca di libri con chiave di testo libera. Utilizza Open Library API
-* `GET   /v1/books/{key}`    => richiede i dettagli di un libro data la sua chiave (Open Library ID). Utilizza Open Library API
-* `POST  /v1/books/reviews/{key}`  => aggiunge una recensione al libro specificato (utilizza un database locale LiteDB).
+* `GET   /v1/books/search` 
+* `GET   /v1/books/{key}`   
+* `POST  /v1/books/reviews/{key}`
 
 ### GET /v1/books/search
+Effettua la ricerca di libri con chiave di testo libera. Utilizza Open Library API
+#### Request
+Http method: `GET`
+Accepts :  `application/json`
+Parameters:
+* text : string - querystring - required
 
-TBD (URL, dettagli delle richieste HTTP supportate, formato e codifica dei dati in input ed output, etc.)
+#### Response
+Status code:
+* 200 OK 
+
+Body:
+``` [
+  {
+    "title": "string",
+    "author": "string",
+    "key": "string",
+    "publicationYear": "string",
+    "authorKey": "string"
+  }
+] 
+```
+
 
 ### GET /v1/books/{key}
+Richiede i dettagli di un libro data la sua chiave (Open Library ID). Utilizza Open Library API
+#### Request
+Http method: `GET`
+Accepts :  `application/json`
+Parameters:
+* key: string - path - required
 
-TBD (URL, dettagli delle richieste HTTP supportate, formato e codifica dei dati in input ed output, etc.)
+#### Response
+Status code:
+* 200 OK 
+
+Body:
+``` [
+  {
+    "title": "string",
+    "author": "string",
+    "key": "string",
+    "publicationYear": "string",
+    "authorKey": "string"
+  }
+]
+```
+
 
 ### POST  /v1/books/reviews/{key}
+Aggiunge una recensione al libro specificato (utilizza un database locale LiteDB)
+#### Request
+Http method: `POST`
+Accepts :  `application/json`
+Parameters:
+* key: string - path - required
+* username: string - body - required
+* reviewText: string - body - required
+* bookRating: int - body - required
 
-TBD (URL, dettagli delle richieste HTTP supportate, formato e codifica dei dati in input ed output, etc.)
+#### Response
+Status code:
+* 201 Created 
 
 ## Messa online dell'API
 
