@@ -98,7 +98,7 @@ namespace Pdgt.BookApi.Controllers
         /// <param name="request">I paraemtri della richiesta</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("/reviews/{key}")]
+        [Route("reviews/{key}")]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.Created)]
         public async Task<ActionResult> PostReviewAsync([FromRoute]string key, [FromBody]BookReviewRequest request)
         {
