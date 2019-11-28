@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Pdgt.BookApi.Auth;
 using Pdgt.BookApi.Contracts;
 using Pdgt.BookApi.Contracts.Examples;
 using Pdgt.BookApi.Services;
@@ -13,7 +14,7 @@ using Swashbuckle.AspNetCore.Examples;
 
 namespace Pdgt.BookApi.Controllers
 {
-
+    [BasicAuthorize("bookreviews")]
     [Route("v1/books")]
     [ApiController]
     public class BooksController : ControllerBase

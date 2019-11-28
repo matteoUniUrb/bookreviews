@@ -31,6 +31,7 @@ namespace Pdgt.BookApi
             //configuration from appsettings
             services.Configure<OpenLibraryConfig>(Configuration.GetSection("OpenLibraryApi"));
             services.Configure<ReviewsRepositoryConfig>(Configuration.GetSection("ReviewsDatabase"));
+            services.Configure<CredentialsConfig>(Configuration.GetSection("Credentials"));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(options => {
