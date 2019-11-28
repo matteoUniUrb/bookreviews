@@ -24,7 +24,7 @@ namespace Pdgt.BookApi.Auth
         }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            string authHeader = context.HttpContext.Request.Headers["Authorization"];
+            string authHeader = context.HttpContext.Request.Headers["WWW-Authenticate"];
             if (authHeader != null && authHeader.StartsWith("Basic "))
             {
                 // Get the encoded username and password
